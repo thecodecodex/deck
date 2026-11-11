@@ -23,10 +23,11 @@ irm https://raw.githubusercontent.com/thecodecodex/deck/main/install.ps1 | iex
 ```
 
 The installer downloads the latest release to `~/.deck/bin`, checks its SHA-256, adds **Deck** to your
-system's app list (Launchpad/Spotlight, the applications menu or the Start menu) and opens `deck setup all`,
-a step-by-step check of your machine. No GitHub account is needed.
+system's app list (Launchpad/Spotlight, the applications menu or the Start menu), opens a setup page in your
+browser where one click installs Deck's own window (so it shows up with Deck's icon), and runs `deck setup all`, a
+step-by-step check of your machine. No GitHub account is needed.
 
-- `DECK_NO_SETUP=1` skips the setup assistant; `DECK_NO_APP=1` skips the app shortcut.
+- `DECK_NO_SETUP=1` skips the setup assistant, `DECK_NO_APP=1` the app shortcut and `DECK_NO_OPEN=1` the setup page.
 - Prefer manual install? Download the file for your system from
   [Releases](https://github.com/thecodecodex/deck/releases/latest) and compare it with `checksums.txt`.
 

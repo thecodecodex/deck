@@ -6,7 +6,7 @@
 #   curl -fsSL https://raw.githubusercontent.com/thecodecodex/deck/main/install.sh | bash
 #
 # Variáveis: DECK_INSTALL_DIR (padrão ~/.deck/bin), DECK_NO_SETUP=1 (não abre o assistente),
-# DECK_NO_APP=1 (não instala o programa na lista de aplicativos).
+# DECK_NO_APP=1 (não instala o programa na lista de aplicativos), DECK_NO_OPEN=1 (não abre a página de instalação).
 set -euo pipefail
 
 REPO="thecodecodex/deck"
@@ -70,7 +70,13 @@ echo
 if [ "${DECK_NO_APP:-}" != "1" ]; then
   "$DEST_DIR/deck" app instalar --yes || echo "Aviso: não foi possível instalar o programa do Deck (rode 'deck app instalar' depois)." >&2
   echo
+  # página de fim da instalação, numa aba do Chrome/Edge/Brave (onde aparece o "Instalar" da janela do Deck)
+  if [ "${DECK_NO_OPEN:-}" != "1" ] && "$DEST_DIR/deck" app abrir --pagina /instalar --aba >/dev/null 2>&1; then
+    echo "Abri o Deck no navegador: clique em \"Instalar\" na página para ele ganhar janela e ícone próprios."
+    echo
+  fi
 fi
+export DECK_INSTALADOR=1
 
 if [ "${DECK_NO_SETUP:-}" = "1" ]; then
   exit 0

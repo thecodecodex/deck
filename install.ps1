@@ -5,7 +5,7 @@
 #   irm https://raw.githubusercontent.com/thecodecodex/deck/main/install.ps1 | iex
 #
 # Variáveis: DECK_INSTALL_DIR (padrão ~\.deck\bin), DECK_NO_SETUP=1 (não abre o assistente),
-# DECK_NO_APP=1 (não cria o atalho no menu Iniciar).
+# DECK_NO_APP=1 (não cria o atalho no menu Iniciar), DECK_NO_OPEN=1 (não abre a página de instalação).
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
@@ -48,7 +48,13 @@ Write-Host "deck instalado em $exe ($(& $exe --version))."
 if ($env:DECK_NO_APP -ne "1") {
     & $exe app instalar --yes
     if ($LASTEXITCODE -ne 0) { Write-Warning "Não foi possível instalar o programa do Deck (rode 'deck app instalar' depois)." }
+    # página de fim da instalação, numa aba do Chrome/Edge/Brave (onde aparece o "Instalar" da janela do Deck)
+    if ($env:DECK_NO_OPEN -ne "1") {
+        & $exe app abrir --pagina /instalar --aba *> $null
+        if ($LASTEXITCODE -eq 0) { Write-Host "Abri o Deck no navegador: clique em ""Instalar"" na página para ele ganhar janela e ícone próprios." }
+    }
 }
+$env:DECK_INSTALADOR = "1"
 Write-Host ""
 
 if ($env:DECK_NO_SETUP -eq "1") { return }
