@@ -48,7 +48,7 @@ Write-Host "deck instalado em $exe ($(& $exe --version))."
 if ($env:DECK_NO_APP -ne "1") {
     & $exe app instalar --yes
     if ($LASTEXITCODE -ne 0) { Write-Warning "Não foi possível instalar o programa do Deck (rode 'deck app instalar' depois)." }
-    # página de fim da instalação, numa aba do Chrome/Edge/Brave (onde aparece o "Instalar" da janela do Deck)
+    # página de fim da instalação, numa aba do navegador padrão (ou Chrome/Edge/Brave se o padrão não for Chromium) (onde aparece o "Instalar" da janela do Deck)
     if ($env:DECK_NO_OPEN -ne "1") {
         & $exe app abrir --pagina /instalar --aba *> $null
         if ($LASTEXITCODE -eq 0) { Write-Host "Abri o Deck no navegador: clique em ""Instalar"" na página para ele ganhar janela e ícone próprios." }

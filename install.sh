@@ -70,7 +70,7 @@ echo
 if [ "${DECK_NO_APP:-}" != "1" ]; then
   "$DEST_DIR/deck" app instalar --yes || echo "Aviso: não foi possível instalar o programa do Deck (rode 'deck app instalar' depois)." >&2
   echo
-  # página de fim da instalação, numa aba do Chrome/Edge/Brave (onde aparece o "Instalar" da janela do Deck)
+  # página de fim da instalação, numa aba do navegador padrão (ou Chrome/Edge/Brave se o padrão não for Chromium) (onde aparece o "Instalar" da janela do Deck)
   if [ "${DECK_NO_OPEN:-}" != "1" ] && "$DEST_DIR/deck" app abrir --pagina /instalar --aba >/dev/null 2>&1; then
     echo "Abri o Deck no navegador: clique em \"Instalar\" na página para ele ganhar janela e ícone próprios."
     echo
